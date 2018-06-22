@@ -11,30 +11,79 @@
 </head>
 
 <body>
-  <canvas width="300" height="300" id="canvas"></canvas>
+  <canvas id="canvas"></canvas>
+  <div id="status222" class="status">
+    <button id="eraserr">橡皮擦</button>
+    <button id="brush">画笔</button>
+  </div>
   <script>
     window.alert("这是一个画板");
     var canvas = document.getElementById('canvas');
-    
-    
-    function getSize() {
-      var pageWidth = document.documentElement.clientWidth        //获得屏幕页面的宽高  ie还不支持
-      var pageHeight = document.documentElement.clientHeight
-
-      canvas.width = pageWidth
-      canvas.height = pageHeight
-    }
-
-    getSize()  
-    //如果屏幕大小改变  就重新获取屏幕尺寸
-    window.onresize = function () {  
-      getSize()
-    }
-
     var context = canvas.getContext('2d');
 
+    setCanvasSize()
+    drawAnderaser()
+
+/***************************             哈哈哈                ********************************/
+    function drawAnderaser(){
     var painting = false
-    //画圆
+    var lastPoint = { x: undefined, y: undefined }
+    canvas.onmousedown = function (a) {
+      var x = a.clientX
+      var y = a.clientY
+      eraserUsing = true
+      if (eraserEnable) {
+        eraser(x, y)
+      } else {
+        painting = true
+        lastPoint = { x: x, y: y }
+        drawCircle(x, y, 2)
+      }
+    }
+    canvas.onmousemove = function (b) {
+      var x = b.clientX
+      var y = b.clientY
+      if (eraserEnable && eraserUsing) {
+        eraser(x, y)
+      } else {
+        if (painting) {
+          var newPoint = { x: x, y: y }
+          drawCircle(x, y, 2)
+          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+          lastPoint = newPoint
+        }
+      }
+    }
+    canvas.onmouseup = function (c) {
+      painting = false
+      eraserUsing = false
+    }
+
+    var eraserEnable = false
+    var eraserUsing = false
+    eraserr.onclick = function () {
+      eraserEnable = true
+      status222.className = 'status x'
+    }
+    brush.onclick = function () {
+      eraserEnable = false
+      status222.className = 'status'
+    }
+  }
+      //设置宽高
+      function setCanvasSize(){
+      function getSize() {
+        var pageWidth = document.documentElement.clientWidth        //获得屏幕页面的宽高  ie还不支持
+        var pageHeight = document.documentElement.clientHeight
+        canvas.width = pageWidth
+        canvas.height = pageHeight
+      }
+      getSize()
+      //如果屏幕大小改变  就重新获取屏幕尺寸
+      window.onresize = function () {
+        getSize()
+      }}
+    //画圆  
     function drawCircle(x, y, radius) {
       context.beginPath()
       context.fillStyle = 'black'
@@ -52,57 +101,11 @@
       context.stroke()
       context.closePath()
     }
-
-    var lastPoint = { x: undefined, y: undefined }
-    canvas.onmousedown = function (a) {
-      painting = true
-      var x = a.clientX
-      var y = a.clientY
-      lastPoint = { x: x, y: y }
-      drawCircle(x, y, 2)
+    
+    //橡皮
+    function eraser(x, y) {
+      context.clearRect(x - 3, y - 3, 6, 6)
     }
-    canvas.onmousemove = function (b) {
-      if (painting) {
-        var x = b.clientX
-        var y = b.clientY
-        var newPoint = { x: x, y: y }
-        drawCircle(x, y, 2)
-        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-        lastPoint = newPoint
-      }
-
-    }
-    canvas.onmouseup = function (c) {
-      painting = false
-    }
-    // context.fillRect(10, 20, 20, 50);      
-    // var div = document.getElementById('canvas')
-    // var painting = false
-    // div.onmousedown = function(a){
-    //   painting = true
-    //   var x = a.clientX
-    //   var y = a.clientY
-    //   var diva = document.createElement('div')
-    //   diva.style = "width:6px; height:6px;"+"background:green;border-radius:3px;"+
-    //   "position:absolute;left:"+(x-11)+"px;"+"top:"+(y-11)+"px;"
-    //   div.appendChild(diva)
-    //   console.log(a)
-    // }
-    // div.onmousemove = function(b){
-    //   if(painting){
-    //     var x = b.clientX
-    //     var y = b.clientY
-    //     var diva = document.createElement('div')
-    //     diva.style = "width:6px; height:6px;"+"background:green;border-radius:3px;"+
-    //     "position:absolute;left:"+(x-11)+"px;"+"top:"+(y-11)+"px;"
-    //     div.appendChild(diva)
-    //     console.log(b)
-    //   }else{}
-
-    // }
-    // div.onmouseup = function(c){
-    //   painting = false
-    // }
   </script>
 </body>
 

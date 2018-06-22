@@ -8,3 +8,17 @@
 body{
   margin: 0;
 }
+div{
+  position:fixed;
+  top:0;
+  right:0;
+}
+.status > #brush{
+  display: none;
+}
+.status.x > #brush{
+  display:inline-block;
+}
+.status.x > #eraserr{
+  display: none;
+}
