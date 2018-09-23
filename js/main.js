@@ -12,15 +12,20 @@ context.lineWidth = 2
 //保存图片
 download.onclick = function(){
   var url = canvas.toDataURL('image/png')
+  //HTMLCanvasElement.toDataURL() 方法返回一个包含图片展示的 data URI 
   var a = document.createElement('a')
   document.body.appendChild(a)
   a.href = url
   a.download = '这是默认名字'
+  //HTMLAnchorElement.download属性是DOMString表示该链接的资源是为了下载而不是在浏览器中显示。
+  //该值表示文件的建议名称
   a.click()
 }
 //清屏
 clear.onclick = function(){
   context.clearRect(0,0,canvas.width,canvas.height)
+  //设置指定矩形区域内（以 点 (x, y) 为起点，范围是(width, height) ）所有像素变成透明，
+  //并擦除之前绘制的所有内容。
 }
 //改变画笔粗细
 thin.onclick = function(){
@@ -33,31 +38,42 @@ thick.onclick = function(){
 black.onclick = function(){
   context.strokeStyle = 'black'
   black.classList.add('active')
-  blue.classList.remove('active')
-  green.classList.remove('active')
-  red.classList.remove('active')
+  $('#black').siblings().removeClass('active')
 }
 red.onclick = function(){
   context.strokeStyle = 'red'
   red.classList.add('active')
-  blue.classList.remove('active')
-  green.classList.remove('active')
-  black.classList.remove('active')
+  $('#red').siblings().removeClass('active')
 }
 blue.onclick = function(){
   context.strokeStyle = 'blue'
   blue.classList.add('active')
-  red.classList.remove('active')
-  green.classList.remove('active')
-  black.classList.remove('active')
+  $('#blue').siblings().removeClass('active')
 }
 green.onclick = function(){
   context.strokeStyle = 'green'
   green.classList.add('active')
-  red.classList.remove('active')
-  blue.classList.remove('active')
-  black.classList.remove('active')
-
+  $("#green").siblings().removeClass('active')
+}
+one.onclick = function(){
+  context.strokeStyle = 'rgb(221, 81, 69)'
+  one.classList.add('active')
+  $("#one").siblings().removeClass('active')
+}
+two.onclick = function(){
+  context.strokeStyle = "rgb(255, 205, 66)"
+  one.classList.add('active')
+  $("#two").siblings().removeClass('active')
+}
+three.onclick = function(){
+  context.strokeStyle = "rgb(26, 165, 95)"
+  $("#three").addClass('active')
+  $("#three").siblings().removeClass('active')
+}
+four.onclick = function(){
+  context.strokeStyle = "rgb(75, 140, 244)"
+  $("#four").addClass('active')
+  $("#four").siblings().removeClass('active')
 }
 function drawAnderaser() {
   var painting = false

@@ -21,7 +21,7 @@ div{
 .icon {
   width: 1.5em; height: 1.5em;
   vertical-align: -0.15em;
-  fill: currentColor;
+  stroke: currentColor;
   overflow: hidden;
 }
 #status222 > svg{
@@ -29,7 +29,7 @@ div{
   margin:6px;
 }
 #status222 > svg.active{
-  fill: yellowgreen;
+  stroke: yellowgreen;
   transform: scale(1.2);              /*1.2倍大*/
 }
 ol{
@@ -60,7 +60,6 @@ ol > li.red{
   border-radius: 50%;
   background:red;
 }
-
 ol > li.blue.active{
   transform: scale(1.2)
 }
@@ -74,6 +73,34 @@ ol > li.green{
   background:green;
 }
 ol > li.green.active{
+  transform: scale(1.2)
+}
+ol > li.one{
+  border-radius: 50%;
+  background: rgb(221, 81, 69);
+}
+ol > li.one.active{
+  transform: scale(1.2)
+}
+ol > li.two{
+  border-radius: 50%;
+  background: rgb(255, 205, 66);
+}
+ol > li.two.active{
+  transform: scale(1.2)
+}
+ol > li.three{
+  border-radius: 50%;
+  background: rgb(26, 165, 95);
+}
+ol > li.three.active{
+  transform: scale(1.2)
+}
+ol > li.four{
+  border-radius: 50%;
+  background: rgb(75, 140, 244);
+}
+ol > li.four.active{
   transform: scale(1.2)
 }
 #bold{
