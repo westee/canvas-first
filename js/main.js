@@ -35,46 +35,23 @@ thick.onclick = function(){
   context.lineWidth =8
 }
 //改变画笔颜色
-black.onclick = function(){
-  context.strokeStyle = 'black'
-  black.classList.add('active')
-  $('#black').siblings().removeClass('active')
-}
-red.onclick = function(){
-  context.strokeStyle = 'red'
-  red.classList.add('active')
-  $('#red').siblings().removeClass('active')
-}
-blue.onclick = function(){
-  context.strokeStyle = 'blue'
-  blue.classList.add('active')
-  $('#blue').siblings().removeClass('active')
-}
-green.onclick = function(){
-  context.strokeStyle = 'green'
-  green.classList.add('active')
-  $("#green").siblings().removeClass('active')
-}
-one.onclick = function(){
-  context.strokeStyle = 'rgb(221, 81, 69)'
-  one.classList.add('active')
-  $("#one").siblings().removeClass('active')
-}
-two.onclick = function(){
-  context.strokeStyle = "rgb(255, 205, 66)"
-  one.classList.add('active')
-  $("#two").siblings().removeClass('active')
-}
-three.onclick = function(){
-  context.strokeStyle = "rgb(26, 165, 95)"
-  $("#three").addClass('active')
-  $("#three").siblings().removeClass('active')
-}
-four.onclick = function(){
-  context.strokeStyle = "rgb(75, 140, 244)"
-  $("#four").addClass('active')
-  $("#four").siblings().removeClass('active')
-}
+let color = {one:'rgb(221, 81, 69)',
+             black:'black',
+             red:'red',
+             blue:'blue',
+             green:'green',
+             two:'rgb(255, 205, 66)',
+             three:'rgb(26, 165, 95)',
+             foru:"rgb(75, 140, 244)"
+            }
+$('#color').on('click','li',(e)=>{
+  let current = (e.target.id)
+  context.strokeStyle = color[current]
+  $(e.currentTarget).addClass('active')
+  $(e.currentTarget).siblings().removeClass('active')
+})
+
+
 function drawAnderaser() {
   var painting = false
   var lastPoint = { x: undefined, y: undefined }
@@ -137,7 +114,7 @@ function drawAnderaser() {
       } else {
         painting = true
         lastPoint = { x: x, y: y }
-        drawCircle(x, y, context.lineWidth/2.2)
+        drawCircle(x, y, context.lineWidth/2)
       }
     }
 
@@ -195,7 +172,6 @@ function drawCircle(x, y, radius) {
   context.fillStyle = context.strokeStyle
   context.arc(x, y, radius, 0, Math.PI * 2.2)
   context.fill()
-  // console.log(context.fillstyle)
 }
 //画线
 function drawLine(x1, y1, x2, y2) {
@@ -205,7 +181,7 @@ function drawLine(x1, y1, x2, y2) {
   context.strokeStyle = context.strokeStyle
   context.lineTo(x2, y2)     //终点
   context.stroke()
-  context.closePath()
+  // context.closePath()
 }
 
 //橡皮
